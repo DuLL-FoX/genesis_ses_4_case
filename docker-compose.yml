@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db:
+    image: nouchka/sqlite3
+    container_name: sqlite_db
+    volumes:
+      - ./data:/data
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      ETHEREAL_EMAIL: ruthie.beier@ethereal.email
+      ETHEREAL_PASSWORD: yWRW7aaB4dQMR8Sqsx
+      DB_FILE: /data/subscribers.db
+    volumes:
+      - ./data:/data
